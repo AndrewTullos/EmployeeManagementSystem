@@ -1,8 +1,6 @@
 /*
-GIVEN a command-line application that accepts user input
 Presented with options: 
-view all departments, view all roles, all employees, 
-add a department, a role, an employee, and update an employee role
+
 View all departments
 Presented with a formatted table showing department names and department ids
 View all roles
@@ -26,54 +24,18 @@ const path = require('path');
 
 const questions = [
     {
-        type: 'input',
-        name: 'title',
-        message: 'What is your project title?',
-    },
-    {
-        type: 'input',
-        name: 'description',
-        message: "What is the description of your project?",
-    },
-    {
-        type: 'input',
-        name: 'motivation',
-        message: 'What was your motivation?',
-    },
-    {
-        type: 'input',
-        name: 'install',
-        message: 'What are the installation instructions for your project?',
-    },
-    {
-        type: 'input',
-        name: 'usage',
-        message: 'What is the usage information?',
-    },
-    {
-        type: 'input',
-        name: 'credit',
-        message: 'List out any contributors and source material.',
-    },
-    {
         type: 'list',
-        name: 'license',
-        message: 'What license are you using?',
-        choices: ["MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "none"],
+        name: 'options',
+        message: 'Select what you would like to do?',
+        choices: [
+        "View all departments", 
+        "View all roles", 
+        "View all employees", 
+        "Add a department", 
+        "Add a role", 
+        "Add a an employee", 
+        "Update an employee role",
+        "Quit"
+        ],
     },
-    {
-        type: 'input',
-        name: 'test',
-        message: 'Describe your testing?',
-    },
-    {
-        type: 'input',
-        name: 'github',
-        message: 'What is your GitHub username?',
-    },
-    {
-        type: 'input',
-        name: 'email',
-        message: 'Enter your email',
-    }
 ];
