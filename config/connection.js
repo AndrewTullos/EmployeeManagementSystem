@@ -1,21 +1,15 @@
-// const Sequelize = require('sequelize');
-// require('dotenv').config();
+const mysql = require('mysql2');
 
-// let sequelize;
+const connection = mysql.createConnection({
+host: 'localhost',
+user: 'root',
+database: 'business',
+password: 'guitar',
+});
 
-// if (process.env.JAWSDB_URL) {
-//     sequelize = new Sequelize(process.env.JAWSDB_URL);
-// } else {
-//     sequelize = new Sequelize(
-//     process.env.DB_NAME,
-//     process.env.DB_USER,
-//     process.env.DB_PASSWORD,
-//     {
-//     host: 'localhost',
-//     dialect: 'mysql',
-//     port: 3306
-//     }
-// );
-// }
+db.connect(err => {
+    if (err) throw err;
+    console.log('Connected to the database.');
+});
 
-// module.exports = sequelize;
+module.exports = connection;
