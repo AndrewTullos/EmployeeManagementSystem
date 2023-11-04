@@ -3,42 +3,13 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const path = require('path');
 const mysql = require('mysql2');
+// const express = require('express')
+const db = require('./config/connection.js');
 
-// const PORT = process.env.PORT || 3001;
-
-// Express middleware
-// 
-
-
-/*
-Presented with options: 
-
-View all departments
-Presented with a formatted table showing department names and department ids
-View all roles
-Presented with the job title, role id, the department that role belongs to, and the salary for that role
-View all employees
-Presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
-Add a department
-Prompted to enter the name of the department and that department is added to the database
-WHEN I choose to add a role
-Prompted to enter the name, salary, and department for the role and that role is added to the database
-WHEN I choose to add an employee
-Prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
-WHEN I choose to update an employee role
-Prompted to select an employee to update and their new role and this information is updated in the database
-*/
-
-// Connect to database
-const db = mysql.createConnection(
-    {
-        host: 'localhost',
-        user: 'root',
-        password: 'guitar',
-        database: 'company_db'
-    },
+db.connect((err) => {
+    if (err) throw err;
     console.log(`Connected to the company_db database.`)
-);
+})
 
 function init() {
     inquirer.prompt([
@@ -88,6 +59,7 @@ function init() {
     });
 }
 
+
 function promptMainMenu() {
     return inquirer.prompt([
         {
@@ -107,7 +79,7 @@ function promptMainMenu() {
                 break;
         }
     });
-}
+};
 
 function viewTable(tableName) {
     const request = `SELECT * FROM ${tableName}`;
@@ -117,16 +89,14 @@ function viewTable(tableName) {
         console.table(res);
         promptMainMenu();
     });
-}
+};
 
-function viewDepartments() {
-    viewTable("department");
-
+function viewDepartments(tableName) {
+    viewTable('department');
 }
-
-function viewRole() {
-    viewRoles("role");
-}
+function viewRoles() {
+    viewTable('role');
+};
 
 function viewEmployees() {
     viewTable("employee");
@@ -140,6 +110,15 @@ function viewEmployees() {
                     ON role.department_id = department.id
                     LEFT JOIN employee manager
                     ON manager.id = employee.manager_id`
+                    promptMainMenu();
+};
+
+function newDepartment() {
+
+}
+
+function newRole() {
+    
 }
 
 function newEmployee() {
@@ -197,12 +176,15 @@ function newEmployee() {
                     }
                 })
             })
-            }
+};
+
+function updateEmployee() {
+    
+}
 
 function Quit() {
     console.log('Goodbye!');
     process.exit();
-}
-
+};
 
 init();
